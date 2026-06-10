@@ -521,10 +521,15 @@ extension Projection: _ObservedResultsValue { }
             storage.filter = newValue
         }
     }
+    @State private var queryFilter: ((Query<ResultType>) -> Query<Bool>)?
     /// Stores a type safe query used for filtering the Results. This is mutually exclusive
     /// to the `filter` parameter.
-    @State public var `where`: ((Query<ResultType>) -> Query<Bool>)? {
-        willSet {
+    public var `where`: ((Query<ResultType>) -> Query<Bool>)? {
+        get {
+            queryFilter
+        }
+        nonmutating set {
+            queryFilter = newValue
             storage.filter = newValue?(Query()).predicate
         }
     }
@@ -725,10 +730,15 @@ extension Projection: _ObservedResultsValue { }
             storage.filter = newValue
         }
     }
+    @State private var queryFilter: ((Query<ResultType>) -> Query<Bool>)?
     /// Stores a type safe query used for filtering the SectionedResults. This is mutually exclusive
     /// to the `filter` parameter.
-    @State public var `where`: ((Query<ResultType>) -> Query<Bool>)? {
-        willSet {
+    public var `where`: ((Query<ResultType>) -> Query<Bool>)? {
+        get {
+            queryFilter
+        }
+        nonmutating set {
+            queryFilter = newValue
             storage.filter = newValue?(Query()).predicate
         }
     }
